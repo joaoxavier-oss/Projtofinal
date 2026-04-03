@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro</title>
+</head>
+
+<body style="display:flex; justify-content:center; align-items:center; height:100vh; background:#111; color:white;">
+
+<div style="text-align:center;">
+    <h1>Cadastro</h1>
+
+    <input id="novoUsuario" placeholder="Usuário"><br><br>
+    <input id="novaSenha" type="password" placeholder="Senha"><br><br>
+
+    <button onclick="cadastrar()">Cadastrar</button>
+</div>
+
+<script>
+function cadastrar() {
+    let user = document.getElementById("novoUsuario").value;
+    let pass = document.getElementById("novaSenha").value;
+
+    localStorage.setItem("usuario", "xavao");
+    localStorage.setItem("senha", "231106");
+
+    alert("Cadastro realizado!");
+
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

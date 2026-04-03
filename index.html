@@ -1,0 +1,118 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Última Cidade</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- MENU -->
+<header class="menu">
+    <div class="logo">
+        <img src="imagem/logo do meu jogo.jpg" alt="Logo">
+    </div>
+
+    <nav>
+        <a href="#jogo">Jogo</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#personagens">Personagens</a>
+        <a href="#teste">Testar</a>
+        <a href="compra.html">Comprar</a>
+        <a href="#" onclick="abrirContato()">Contato</a>
+    </nav>
+</header>
+
+<!-- CAPA -->
+<section class="capa" id="jogo">
+    <a href="teste/index.html">
+        <button class="btn-testar">Testar Agora</button>
+    </a>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+    <h2>Sobre o Jogo</h2>
+
+    <div class="sobre-container">
+        <div class="sobre-texto">
+            <p>Um vírus mortal se espalhou rapidamente...</p>
+            <p>Em <strong>Última Cidade</strong>, você é um sobrevivente...</p>
+            <p>Para isso, você precisará atravessar áreas perigosas...</p>
+
+            <p class="frase-impacto">
+                "A última cidade pode ser sua única esperança."
+            </p>
+        </div>
+
+        <div class="destaques-box">
+            <h3>Destaques do jogo</h3>
+            <ul>
+                <li>🧭 Missão: chegar na última cidade</li>
+                <li>🧟 Zumbis diferentes</li>
+                <li>🔍 Exploração</li>
+                <li>⚔️ Sobrevivência intensa</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- PERSONAGENS -->
+<section id="personagens" class="personagens">
+    <h2>Personagens</h2>
+
+    <div class="cards">
+        <div class="card">
+            <img src="imagem/sobrevivente.jpg">
+            <h3>Sobrevivente</h3>
+            <p>Último humano tentando sobreviver.</p>
+        </div>
+
+        <div class="card">
+            <img src="imagem/zumbi masculino.jpg">
+            <h3>Zumbi masculino</h3>
+            <p>Lento, mas forte.</p>
+        </div>
+
+        <div class="card">
+            <img src="imagem/zumbi feminino.jpg">
+            <h3>Zumbi feminino</h3>
+            <p>Rápida e perigosa.</p>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL CONTATO -->
+<div id="contatoModal" class="login-modal">
+    <div class="login-box">
+        <span class="fechar" onclick="fecharContato()">×</span>
+
+        <h2>Contato</h2>
+
+        <input type="text" placeholder="Nome completo">
+        <input type="email" placeholder="Email">
+        <textarea placeholder="Sua mensagem"></textarea><br><br>
+
+        <button onclick="enviarMensagem()">Enviar</button>
+    </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+function abrirContato() {
+    document.getElementById("contatoModal").style.display = "flex";
+}
+
+function fecharContato() {
+    document.getElementById("contatoModal").style.display = "none";
+}
+
+function enviarMensagem() {
+    alert("Mensagem enviada com sucesso! 🚀");
+    fecharContato();
+}
+</script>
+
+</body>
+</html>
