@@ -6,15 +6,13 @@
     <title>Última Cidade</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ESTILOS ORIGINAIS MANTIDOS */
+        /* ESTILOS INTERNOS DOS MODAIS */
         .modal-geral {
             display: none;
             position: fixed;
             z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.9);
             overflow-y: auto;
         }
@@ -22,29 +20,27 @@
         .modal-conteudo {
             background-color: #ffffff;
             margin: 5% auto;
-            padding: 0;
             width: 90%;
             max-width: 700px;
             color: #333;
             border-radius: 15px;
             position: relative;
-            overflow: hidden;
             font-family: 'Segoe UI', Arial, sans-serif;
             box-shadow: 0 5px 30px rgba(0,0,0,0.5);
             text-align: center;
+            overflow: hidden;
         }
 
         .fechar {
             position: absolute;
-            right: 25px;
-            top: 15px;
+            right: 25px; top: 15px;
             font-size: 30px;
             cursor: pointer;
             color: #999;
             z-index: 10;
         }
 
-        .topo-modal { padding: 40px 20px; text-align: center; }
+        .topo-modal { padding: 40px 20px; }
         .topo-modal h2 { font-size: 2.5rem; margin: 0; color: #000; text-transform: uppercase; font-weight: 900; }
 
         .form-container { display: flex; flex-wrap: wrap; gap: 20px; padding: 0 40px; }
@@ -98,9 +94,13 @@
         <a href="#" onclick="abrirPagina('comandos.html')">Comandos</a>
         <a href="#" onclick="abrirContato()">Contato</a>
     </nav>
+
+    <button id="btn-tema" onclick="alternarModo()" style="background:rgba(0,0,0,0.5); border: 1px solid white; color: white; cursor: pointer; padding: 8px 15px; border-radius: 20px; font-weight: bold;">
+        Tema Escuro
+    </button>
 </header>
 
-<a href="#" class="btn-voltar" onclick="voltarPagina()">←</a>
+<a href="#" class="btn-voltar" onclick="voltarPagina()">← VOLTAR PARA A BASE</a>
 
 <section class="capa">
     <div class="overlay"></div>
@@ -110,8 +110,17 @@
 </section>
 
 <section class="conteudo">
-    <iframe id="frameSite" src="sobre.html"></iframe>
+    <iframe id="frameSite" src="about:blank"></iframe>
 </section>
+
+<div id="status-jogo" class="status-painel" style="display:none;">
+    <h4 style="margin: 0 0 10px 0; border-bottom: 1px solid white;">STATUS</h4>
+    <p>👤 <span id="display-nome">---</span></p> 
+    <p>🎂 Idade: <span id="display-idade">---</span></p>
+    <p>❤️ Vida: <span id="display-vida">---</span></p>
+    <p>⭐ Nível: <span id="display-nivel">---</span></p>
+    <p>🔫 Munição: <span id="display-balas">---</span></p>
+</div>
 
 <div id="contatoModal" class="modal-geral">
     <div class="modal-conteudo">
