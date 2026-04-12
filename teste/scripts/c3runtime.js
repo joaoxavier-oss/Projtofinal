@@ -1249,6 +1249,11 @@ self["C3_Shaders"] = {};
 {const e=self.C3;e.Behaviors.bound=class extends e.SDKBehaviorBase{constructor(e){super(e)}Release(){super.Release()}}}{const e=self.C3;e.Behaviors.bound.Type=class extends e.SDKBehaviorTypeBase{constructor(e){super(e)}Release(){super.Release()}OnCreate(){}}}{const e=self.C3,t=0,s=1,o=new e.Rect;e.Behaviors.bound.Instance=class extends e.SDKBehaviorInstanceBase{#e=0;#t=0;constructor(e,o){super(e),o&&(this.#e=o[t],this.#t=o[s]),this._StartTicking2()}Release(){super.Release()}SaveToJson(){return{"m":this.#e,"r":this.#t}}LoadFromJson(e){this.#e=e["m"],this.#t=e["r"]??0}Tick2(){const e=this._inst.GetWorldInfo(),t=e.GetBoundingBox();let s=!1;const i=o;if(0===this.#t){const t=e.GetLayout();i.set(0,0,t.GetWidth(),t.GetHeight())}else i.copy(e.GetLayer().GetViewport());0===this.#e?(e.GetX()<i.getLeft()&&(e.SetX(i.getLeft()),s=!0),e.GetY()<i.getTop()&&(e.SetY(i.getTop()),s=!0),e.GetX()>i.getRight()&&(e.SetX(i.getRight()),s=!0),e.GetY()>i.getBottom()&&(e.SetY(i.getBottom()),s=!0)):(t.getLeft()<i.getLeft()&&(e.OffsetX(i.getLeft()-t.getLeft()),s=!0),t.getTop()<i.getTop()&&(e.OffsetY(i.getTop()-t.getTop()),s=!0),t.getRight()>i.getRight()&&(e.OffsetX(i.getRight()-t.getRight()),s=!0),t.getBottom()>i.getBottom()&&(e.OffsetY(i.getBottom()-t.getBottom()),s=!0)),s&&e.SetBboxChanged()}GetPropertyValueByIndex(e){switch(e){case t:return this.#e;case s:return this.#t}}SetPropertyValueByIndex(e,o){switch(e){case t:this.#e=o;break;case s:this.#t=o}}}}self.C3.Behaviors.bound.Cnds={};self.C3.Behaviors.bound.Acts={};self.C3.Behaviors.bound.Exps={};
 }
 
+// scripts/behaviors/Flash/c3runtime/runtime.js
+{
+{const e=self.C3;e.Behaviors.Flash=class extends e.SDKBehaviorBase{constructor(e){super(e)}Release(){super.Release()}}}{const e=self.C3;e.Behaviors.Flash.Type=class extends e.SDKBehaviorTypeBase{constructor(e){super(e)}Release(){super.Release()}OnCreate(){}}}{const e=self.C3,t=self.C3X,s=self.IBehaviorInstance;e.Behaviors.Flash.Instance=class extends e.SDKBehaviorInstanceBase{constructor(e,t){super(e),this._onTime=0,this._offTime=0,this._stage=0,this._stageTimeLeft=0,this._timeLeft=0,this._StartTicking()}Release(){super.Release()}_Flash(e,t,s){this._onTime=e,this._offTime=t,this._stage=1,this._stageTimeLeft=t,this._timeLeft=s,this._inst.GetWorldInfo().SetVisible(!1),this._runtime.UpdateRender()}_StopFlashing(){this._timeLeft=0,this._inst.GetWorldInfo().SetVisible(!0),this._runtime.UpdateRender()}_IsFlashing(){return this._timeLeft>0}SaveToJson(){return{"on":this._onTime,"off":this._offTime,"s":this._stage,"stl":this._stageTimeLeft,"tl":this._timeLeft}}LoadFromJson(e){this._onTime=e["on"],this._offTime=e["off"],this._stage=e["s"],this._stageTimeLeft=e["stl"],this._timeLeft=null===e["tl"]?1/0:e["tl"]}Tick(){if(this._timeLeft<=0)return;const t=this._runtime.GetDt(this._inst);if(this._timeLeft-=t,this._timeLeft<=0)return this._timeLeft=0,this._inst.GetWorldInfo().SetVisible(!0),this._runtime.UpdateRender(),this.DispatchScriptEvent("flashend"),this.DebugTrigger(e.Behaviors.Flash.Cnds.OnFlashEnded);this._stageTimeLeft-=t,this._stageTimeLeft<=0&&(0===this._stage?(this._inst.GetWorldInfo().SetVisible(!1),this._stage=1,this._stageTimeLeft+=this._offTime):(this._inst.GetWorldInfo().SetVisible(!0),this._stage=0,this._stageTimeLeft+=this._onTime),this._runtime.UpdateRender())}GetDebuggerProperties(){const e="behaviors.flash.debugger";return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:e+".on-time",value:this._onTime,onedit:e=>this._onTime=e},{name:e+".off-time",value:this._offTime,onedit:e=>this._offTime=e},{name:e+".is-flashing",value:this._timeLeft>0},{name:e+".time-left",value:this._timeLeft}]}]}GetScriptInterfaceClass(){return self.IFlashBehaviorInstance}};const i=new WeakMap;self.IFlashBehaviorInstance=class extends s{constructor(){super(),i.set(this,s._GetInitInst().GetSdkInstance())}flash(e,s,h){t.RequireFiniteNumber(e),t.RequireFiniteNumber(s),t.RequireFiniteNumber(h),i.get(this)._Flash(e,s,h)}stop(){i.get(this)._StopFlashing()}get isFlashing(){return i.get(this)._IsFlashing()}}}self.C3.Behaviors.Flash.Cnds={IsFlashing(){return this._IsFlashing()},OnFlashEnded:()=>!0};self.C3.Behaviors.Flash.Acts={Flash(e,t,s){this._Flash(e,t,s)},StopFlashing(){this._StopFlashing()}};self.C3.Behaviors.Flash.Exps={};
+}
+
 // scripts/behaviors/Anchor/c3runtime/runtime.js
 {
 {const t=self.C3;t.Behaviors.Anchor=class extends t.SDKBehaviorBase{constructor(t){super(t)}Release(){super.Release()}}}{const t=self.C3;t.Behaviors.Anchor.Type=class extends t.SDKBehaviorTypeBase{constructor(t){super(t)}Release(){super.Release()}OnCreate(){}}}{const t=self.C3,e=(self.C3X,self.IBehaviorInstance),i=0,s=1,h=2,o=3,n=4;t.Behaviors.Anchor.Instance=class extends t.SDKBehaviorInstanceBase{constructor(e,a){super(e),this._anchorLeft=2,this._anchorTop=2,this._anchorRight=0,this._anchorBottom=0,this._isEnabled=!0;const r=this._inst.GetWorldInfo().GetBoundingBox();this._xLeft=r.getLeft(),this._yTop=r.getTop(),this._xRight=this._runtime.GetOriginalViewportWidth()-r.getLeft(),this._yBottom=this._runtime.GetOriginalViewportHeight()-r.getTop(),this._rDiff=this._runtime.GetOriginalViewportWidth()-r.getRight(),this._bDiff=this._runtime.GetOriginalViewportHeight()-r.getBottom(),a&&(this._anchorLeft=a[i],this._anchorTop=a[s],this._anchorRight=a[h],this._anchorBottom=a[o],this._isEnabled=!!a[n]);const _=this._runtime.Dispatcher();this._disposables=new t.CompositeDisposable(t.Disposable.From(_,"layoutchange",()=>this._OnLayoutChange())),this._isEnabled&&this._StartTicking()}Release(){super.Release()}SaveToJson(){return{"xl":this._xLeft,"yt":this._yTop,"xr":this._xRight,"yb":this._yBottom,"rd":this._rDiff,"bd":this._bDiff,"al":this._anchorLeft,"at":this._anchorTop,"ar":this._anchorRight,"ab":this._anchorBottom,"e":this._isEnabled}}LoadFromJson(t){this._xLeft=t["xl"],this._yTop=t["yt"],this._xRight=t["xr"],this._yBottom=t["yb"],this._rDiff=t["rd"],this._bDiff=t["bd"],this._anchorLeft=t["al"],this._anchorTop=t["at"],this._anchorRight=t["ar"],this._anchorBottom=t["ab"],this._isEnabled=t["e"],this._isEnabled?this._StartTicking():this._StopTicking()}_SetEnabled(t){if(this._isEnabled&&!t)this._isEnabled=!1,this._StopTicking();else if(!this._isEnabled&&t){const t=this._inst.GetWorldInfo().GetBoundingBox();this._xLeft=t.getLeft(),this._yTop=t.getTop(),this._xRight=this._runtime.GetOriginalViewportWidth()-t.getLeft(),this._yBottom=this._runtime.GetOriginalViewportHeight()-t.getTop(),this._rDiff=this._runtime.GetOriginalViewportWidth()-t.getRight(),this._bDiff=this._runtime.GetOriginalViewportHeight()-t.getBottom(),this._isEnabled=!0,this._StartTicking()}}_IsEnabled(){return this._isEnabled}_UpdatePosition(){if(!this._isEnabled)return;const t=this._inst.GetWorldInfo(),e=t.GetLayer().GetViewport();if(0===this._anchorLeft){const i=e.getLeft()+this._xLeft-t.GetBoundingBox().getLeft();0!==i&&(t.OffsetX(i),t.SetBboxChanged())}else if(1===this._anchorLeft){const i=e.getRight()-this._xRight-t.GetBoundingBox().getLeft();0!==i&&(t.OffsetX(i),t.SetBboxChanged())}if(0===this._anchorTop){const i=e.getTop()+this._yTop-t.GetBoundingBox().getTop();0!==i&&(t.OffsetY(i),t.SetBboxChanged())}else if(1===this._anchorTop){const i=e.getBottom()-this._yBottom-t.GetBoundingBox().getTop();0!==i&&(t.OffsetY(i),t.SetBboxChanged())}if(1===this._anchorRight){const i=e.getRight()-this._rDiff-t.GetBoundingBox().getRight();0!==i&&(t.OffsetX(t.GetOriginX()*i),t.SetWidth(Math.max(t.GetWidth()+i),0),t.SetBboxChanged(),this._rDiff=e.getRight()-t.GetBoundingBox().getRight())}if(1===this._anchorBottom){const i=e.getBottom()-this._bDiff-t.GetBoundingBox().getBottom();0!==i&&(t.OffsetY(t.GetOriginY()*i),t.SetHeight(Math.max(t.GetHeight()+i,0)),t.SetBboxChanged(),this._bDiff=e.getBottom()-t.GetBoundingBox().getBottom())}}Tick(){this._UpdatePosition()}_OnLayoutChange(){this._UpdatePosition()}GetPropertyValueByIndex(t){switch(t){case i:return this._anchorLeft;case s:return this._anchorTop;case h:return this._anchorRight;case o:return this._anchorBottom;case n:return this._isEnabled}}SetPropertyValueByIndex(t,e){switch(t){case i:this._anchorLeft=e;break;case s:this._anchorTop=e;break;case h:this._anchorRight=e;break;case o:this._anchorBottom=e;break;case n:this._isEnabled=!!e,this._isEnabled?this._StartTicking():this._StopTicking()}}GetDebuggerProperties(){return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:"behaviors.anchor.properties.enabled.name",value:this._IsEnabled(),onedit:t=>this._SetEnabled(t)}]}]}GetScriptInterfaceClass(){return self.IAnchorBehaviorInstance}};const a=new WeakMap;self.IAnchorBehaviorInstance=class extends e{constructor(){super(),a.set(this,e._GetInitInst().GetSdkInstance())}get isEnabled(){return a.get(this)._IsEnabled()}set isEnabled(t){a.get(this)._SetEnabled(t)}}}self.C3.Behaviors.Anchor.Cnds={IsEnabled(){return this._IsEnabled()}};self.C3.Behaviors.Anchor.Acts={SetEnabled(t){this._SetEnabled(0!==t)}};self.C3.Behaviors.Anchor.Exps={};
@@ -1357,7 +1362,10 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
-		() => "Correndo",
+		() => -20,
+		() => 0,
+		() => "",
+		() => 100,
 		() => "Parado",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -1371,15 +1379,61 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 50);
 		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpInstVar();
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 60);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 40);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 20);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 40);
+		},
+		() => "Correndo",
+		() => 180,
 		() => 70,
 		() => -717750020342783,
 		() => 30,
 		() => -717706215031807,
+		() => "atirando",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("bala");
 		},
-		() => "atirando"
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => v0.GetValue();
+		},
+		() => -15,
+		() => 3,
+		() => 6,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 600);
+		},
+		() => 518,
+		() => 1,
+		() => 0.1,
+		() => 0.01,
+		() => "morte",
+		() => 25,
+		() => 0.2,
+		() => -700,
+		() => -250,
+		() => "Morte",
+		() => 2,
+		() => 56,
+		() => 524
 ];
 
 

@@ -2,117 +2,140 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Última Cidade</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ESTILOS ORIGINAIS MANTIDOS */
+        .modal-geral {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            overflow-y: auto;
+        }
+
+        .modal-conteudo {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 700px;
+            color: #333;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .fechar {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+            z-index: 10;
+        }
+
+        .topo-modal { padding: 40px 20px; text-align: center; }
+        .topo-modal h2 { font-size: 2.5rem; margin: 0; color: #000; text-transform: uppercase; font-weight: 900; }
+
+        .form-container { display: flex; flex-wrap: wrap; gap: 20px; padding: 0 40px; }
+        .input-grupo { flex: 1; min-width: 250px; text-align: left; }
+        .input-grupo label { display: block; font-weight: bold; margin-bottom: 5px; color: #444; }
+
+        .modal-conteudo input, .modal-conteudo textarea {
+            width: 100%; padding: 15px; background: #f4f4f4; border: none; border-radius: 30px; 
+            font-size: 1rem; outline: none; box-sizing: border-box;
+        }
+
+        .btn-enviar {
+            background-color: #ff0000; color: white; border: none; padding: 15px 80px;
+            cursor: pointer; font-weight: bold; text-transform: uppercase; border-radius: 30px;
+            margin-bottom: 40px; transition: 0.3s;
+        }
+
+        .age-box input {
+            width: 100%; margin: 10px 0; padding: 10px; border: none;
+            border-radius: 5px; background: #333; color: white; box-sizing: border-box;
+        }
+        .age-box button {
+            width: 100%; padding: 10px; background: red; color: white;
+            border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- MENU -->
+<div id="ageModal" class="age-modal">
+    <div class="age-box">
+        <h2 id="mensagem" style="color:red; font-family: 'Orbitron';">IDENTIFIQUE-SE</h2>
+        <p style="color:white">O acesso à Última Cidade requer credenciais.</p>
+        <input type="text" id="inputNome" placeholder="Digite seu nome">
+        <input type="number" id="inputIdade" placeholder="Digite sua idade" style="display:none;">
+        <button onclick="proximaEtapa()">Continuar</button>
+    </div>
+</div>
+
 <header class="menu">
     <div class="logo">
         <img src="imagem/logo do meu jogo.jpg" alt="Logo">
     </div>
 
     <nav>
-        <a href="#jogo">Jogo</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#personagens">Personagens</a>
-        <a href="#teste">Testar</a>
-        <a href="compra.html">Comprar</a>
+        <a href="#" onclick="abrirPagina('teste/index.html')">Jogo</a>
+        <a href="#" onclick="abrirPagina('sobre.html')">Sobre</a>
+        <a href="#" onclick="abrirPagina('personagens.html')">Personagens</a>
+        <a href="#" onclick="abrirPagina('historia.html')">História</a>
+        <a href="#" onclick="abrirPagina('comandos.html')">Comandos</a>
         <a href="#" onclick="abrirContato()">Contato</a>
     </nav>
 </header>
 
-<!-- CAPA -->
-<section class="capa" id="jogo">
-    <a href="teste/index.html">
-        <button class="btn-testar">Testar Agora</button>
-    </a>
+<a href="#" class="btn-voltar" onclick="voltarPagina()">←</a>
+
+<section class="capa">
+    <div class="overlay"></div>
+    <button class="btn-testar" onclick="abrirPagina('teste/index.html')">
+        Jogue o Jogo
+    </button>
 </section>
 
-<!-- SOBRE -->
-<section class="sobre" id="sobre">
-    <h2>Sobre o Jogo</h2>
-
-    <div class="sobre-container">
-        <div class="sobre-texto">
-            <p>Um vírus mortal se espalhou rapidamente...</p>
-            <p>Em <strong>Última Cidade</strong>, você é um sobrevivente...</p>
-            <p>Para isso, você precisará atravessar áreas perigosas...</p>
-
-            <p class="frase-impacto">
-                "A última cidade pode ser sua única esperança."
-            </p>
-        </div>
-
-        <div class="destaques-box">
-            <h3>Destaques do jogo</h3>
-            <ul>
-                <li>🧭 Missão: chegar na última cidade</li>
-                <li>🧟 Zumbis diferentes</li>
-                <li>🔍 Exploração</li>
-                <li>⚔️ Sobrevivência intensa</li>
-            </ul>
-        </div>
-    </div>
+<section class="conteudo">
+    <iframe id="frameSite" src="sobre.html"></iframe>
 </section>
 
-<!-- PERSONAGENS -->
-<section id="personagens" class="personagens">
-    <h2>Personagens</h2>
-
-    <div class="cards">
-        <div class="card">
-            <img src="imagem/foto-do-personagem.png">
-            <h3>Sobrevivente</h3>
-            <p>Sobrevivente tentando chegar a ultima cidade segura no mundo e vc é o responsavel por ajudar ele a chegar.</p>
-        </div>
-
-        <div class="card">
-            <img src="imagem/zumbi masculino.jpg">
-            <h3>Zumbi masculino</h3>
-            <p>Ele é lento mas tem uma força descomunal será que vc consegue passar dele?.</p>
-        </div>
-
-        <div class="card">
-            <img src="imagem/foto-zumbi-feminino.png">
-            <h3>Zumbi feminino</h3>
-            <p>Ela é mais fraca mais é muito mais rápida </p>
-        </div>
-    </div>
-</section>
-
-<!-- MODAL CONTATO -->
-<div id="contatoModal" class="login-modal">
-    <div class="login-box">
+<div id="contatoModal" class="modal-geral">
+    <div class="modal-conteudo">
         <span class="fechar" onclick="fecharContato()">×</span>
-
-        <h2>Contato</h2>
-
-        <input type="text" placeholder="Nome completo">
-        <input type="email" placeholder="Email">
-        <textarea placeholder="Sua mensagem"></textarea><br><br>
-
-        <button onclick="enviarMensagem()">Enviar</button>
+        <div class="topo-modal">
+            <h2>Contate-nos</h2>
+            <p>Olá, me chamo João Victor Xavier. Escreva sua mensagem!</p>
+        </div>
+        <div class="form-container">
+            <div class="input-grupo">
+                <label>Email</label>
+                <input type="email" id="contatoEmail" placeholder="Seu e-mail">
+            </div>
+            <div class="input-grupo">
+                <label>Nome</label>
+                <input type="text" id="contatoNome" placeholder="Seu nome">
+            </div>
+        </div>
+        <textarea id="contatoMensagem" rows="4" style="width: calc(100% - 80px); margin: 20px 40px;" placeholder="Escreva aqui..."></textarea>
+        <center><button class="btn-enviar" onclick="enviarMensagem()">Enviar Mensagem</button></center>
     </div>
 </div>
 
-<!-- JAVASCRIPT -->
-<script>
-function abrirContato() {
-    document.getElementById("contatoModal").style.display = "flex";
-}
-
-function fecharContato() {
-    document.getElementById("contatoModal").style.display = "none";
-}
-
-function enviarMensagem() {
-    alert("Mensagem enviada com sucesso! 🚀");
-    fecharContato();
-}
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Última Cidade</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: rgba(15, 0, 0, 0.95);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            padding: 40px 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .sobre-container {
+            max-width: 900px;
+            width: 100%;
+            background: #111;
+            border: 1px solid red;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: red;
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .texto-sobre {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #eee;
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        /* --- GALERIA RESPONSIVA --- */
+        .galeria-jogo {
+            display: grid;
+            /* A mágica do minmax acontece aqui: */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .item-foto {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .item-foto:hover {
+            border-color: red;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .foto-jogo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* Faz a foto preencher o espaço sem distorcer */
+            display: block;
+        }
+
+        .legenda {
+            padding: 10px;
+            font-size: 0.9rem;
+            color: #ff0000;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .frase-final {
+            margin-top: 50px;
+            font-size: 1.5rem;
+            color: red;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sobre-container">
+        <h1>Sobre a Última Cidade</h1>
+        
+        <div class="texto-sobre">
+            <p>O mundo como o conhecemos acabou. As cidades se tornaram cemitérios de aço e o silêncio é o seu maior inimigo. Em <strong>Última Cidade</strong>, você assume o papel de um sobrevivente em busca de respostas e recursos em um território implacável.</p>
+            <p>Explore ruínas, enfrente perigos desconhecidos e reconstrua o que foi perdido. Este não é apenas um jogo, é um teste de resistência.</p>
+        </div>
+
+        <h2>Galeria de Combate</h2>
+        
+        <div class="galeria-jogo">
+            <div class="item-foto">
+                <img src="imagem/foto-atirando-site.jpeg" alt="Cenário" class="foto-jogo">
+                <div class="legenda">Foto do personagem atirando</div>
+            </div>
+
+            <div class="item-foto">
+                <img src="imagem/foto-jogo-site.jpeg" alt="Ação" class="foto-jogo">
+                <div class="legenda">foto do jogo</div>
+            </div>
+
+            <div class="item-foto">
+                <img src="imagem/foto-gameouver-site.jpeg" alt="Base" class="foto-jogo">
+                <div class="legenda">Tela de game ouver</div>
+            </div>
+        </div>
+
+        <div class="frase-final">
+            A SOBREVIVÊNCIA COMEÇA AGORA.
+        </div>
+    </div>
+
+</body>
+</html>
