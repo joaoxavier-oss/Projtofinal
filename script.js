@@ -26,6 +26,12 @@ function abrirPagina(pagina) {
     document.querySelector(".conteudo").style.display = "block";
     document.querySelector(".btn-voltar").style.display = "block";
     
+    // ESCONDE O STATUS AO ENTRAR EM QUALQUER PÁGINA
+    const painelStatus = document.getElementById("status-jogo");
+    if (painelStatus) {
+        painelStatus.style.display = "none";
+    }
+    
     document.getElementById("frameSite").src = pagina + "?v=" + new Date().getTime();
 }
 
@@ -34,6 +40,12 @@ function voltarPagina() {
     document.querySelector(".capa").style.display = "flex";
     document.querySelector(".conteudo").style.display = "none";
     document.querySelector(".btn-voltar").style.display = "none";
+
+    // MOSTRA O STATUS NOVAMENTE AO VOLTAR PARA A CAPA
+    const painelStatus = document.getElementById("status-jogo");
+    if (painelStatus) {
+        painelStatus.style.display = "block";
+    }
 }
 
 // ==========================================
@@ -50,7 +62,7 @@ window.onload = function() {
     const anoAtual = new Date().getFullYear(); 
     
     if (anoAtual === ANO_LANCAMENTO) {
-        alert("GRANDE LANÇAMENTO: O jogo 'Última Cidade' foi lançado este ano de " + anoAtual + "!");
+        alert("GRANDE LANÇAMENTO: O jogo 'Última Cidade' foi lançado neste ano de " + anoAtual + "!");
     }
 };
 
@@ -71,6 +83,7 @@ function proximaEtapa() {
         const playerIdade = idadeInput;
         const playerVida = 100;
         let playerNivel = 1;
+        let playerNivelAtual = 1; // Ajuste técnico se necessário
         let playerMunicao = 45;
 
         document.getElementById("display-nome").innerText = "Agente " + playerNome;
